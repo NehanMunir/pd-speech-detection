@@ -1,8 +1,7 @@
 import pydub, os, simpleaudio
 from pydub import AudioSegment
 
-#make sure to pip install audioop-lts
-#also follow this for ffmpeg: https://www.gyan.dev/ffmpeg/builds/
+#make sure to pip install audioop-lts (Check if this is needed!)
 #song = AudioSegment.from_wav("never_gonna_give_you_up.wav")
 
 

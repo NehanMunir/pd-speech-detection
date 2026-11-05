@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+numpy = "==2.3.2"
+packaging = "==25.0"
+pillow = "==11.3.0"
+pycryptodome = "==4.1.0"
+pyparsing = "==3.2.3"
+six = "==1.17.0"
+pydub = "*"
+simpleaudio = "*"
+pandas = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
