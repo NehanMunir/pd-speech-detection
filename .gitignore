@@ -2,3 +2,5 @@ dataset/
 preprocessing/praatinfo.txt
 preprocessing/__pycache__/
 .venv
+db/
+test.ipynb
