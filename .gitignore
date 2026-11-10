@@ -5,3 +5,11 @@ preprocessing/__pycache__/
 db/
 test.ipynb
 model/COMPSCI 4AL3.code-workspace
+docs/*
+!docs/progress_report/
+docs/progress_report/*
+!docs/progress_report/main.tex
+!docs/progress_report/acl.sty
+!docs/progress_report/custom.bib
+!docs/progress_report/acl_natbib.bst
+!docs/progress_report/main.pdf
