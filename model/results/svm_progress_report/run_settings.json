@@ -1,0 +1,39 @@
+{
+  "seed": 42,
+  "features": [
+    "CPPS",
+    "HNR",
+    "Shimmer (local)",
+    "Shimmer (local_dB)",
+    "LTAS Slope",
+    "LTAS Tilt"
+  ],
+  "segments": 1013,
+  "participants": 37,
+  "evaluation": "5-fold StratifiedGroupKFold; segment-level metrics; no tuning or independent test",
+  "standardization": "StandardScaler fitted separately on each training fold",
+  "svm": {
+    "C": 1.0,
+    "break_ties": false,
+    "cache_size": 200,
+    "class_weight": null,
+    "coef0": 0.0,
+    "decision_function_shape": "ovr",
+    "degree": 3,
+    "gamma": "scale",
+    "kernel": "rbf",
+    "max_iter": -1,
+    "probability": false,
+    "random_state": null,
+    "shrinking": true,
+    "tol": 0.001,
+    "verbose": false
+  },
+  "baseline": "DummyClassifier(strategy='most_frequent')",
+  "versions": {
+    "python": "3.14.2",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0"
+  }
+}
