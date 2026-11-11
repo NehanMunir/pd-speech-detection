@@ -8,177 +8,373 @@
 
 % For proper rendering and hyphenation of words containing Latin characters (including in bib files)
 \usepackage[T1]{fontenc}
-% For Vietnamese characters
-% \usepackage[T5]{fontenc}
-% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
-
 % This assumes your files are encoded as UTF8
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
 \usepackage{inconsolata}
 \usepackage{graphicx}
+\usepackage{amsmath}
 
-% If the title and author information does not fit in the area allocated, uncomment the following
-%
-%\setlength\titlebox{<dim>}
-%
-% and set <dim> to something 5cm or larger.
+\title{Group 1 Progress Report:\\Detecting Parkinson's Disease Using Acoustic Characteristics}
 
-\title{Group X Progress Report:\\My Group's Project Name}
+% Add MacIDs here if the course requires email addresses, e.g.
+% 
 
 
-\author{Nehan Munir, Second Author, Third Author \\
-  \texttt{\{munirn3,macid2,macid3\}@mcmaster.ca} }
 
-%\author{
-%  \textbf{First Author\textsuperscript{1}},
-%  \textbf{Second Author\textsuperscript{1,2}},
-%  \textbf{Third T. Author\textsuperscript{1}},
-%  \textbf{Fourth Author\textsuperscript{1}},
-%\\
-%  \textbf{Fifth Author\textsuperscript{1,2}},
-%  \textbf{Sixth Author\textsuperscript{1}},
-%  \textbf{Seventh Author\textsuperscript{1}},
-%  \textbf{Eighth Author \textsuperscript{1,2,3,4}},
-%\\
-%  \textbf{Ninth Author\textsuperscript{1}},
-%  \textbf{Tenth Author\textsuperscript{1}},
-%  \textbf{Eleventh E. Author\textsuperscript{1,2,3,4,5}},
-%  \textbf{Twelfth Author\textsuperscript{1}},
-%\\
-%  \textbf{Thirteenth Author\textsuperscript{3}},
-%  \textbf{Fourteenth F. Author\textsuperscript{2,4}},
-%  \textbf{Fifteenth Author\textsuperscript{1}},
-%  \textbf{Sixteenth Author\textsuperscript{1}},
-%\\
-%  \textbf{Seventeenth S. Author\textsuperscript{4,5}},
-%  \textbf{Eighteenth Author\textsuperscript{3,4}},
-%  \textbf{Nineteenth N. Author\textsuperscript{2,5}},
-%  \textbf{Twentieth Author\textsuperscript{1}}
-%\\
-%\\
-%  \textsuperscript{1}Affiliation 1,
-%  \textsuperscript{2}Affiliation 2,
-%  \textsuperscript{3}Affiliation 3,
-%  \textsuperscript{4}Affiliation 4,
-%  \textsuperscript{5}Affiliation 5
-%\\
-%  \small{
-%    \textbf{Correspondence:} \href{mailto:email@domain}{email@domain}
-%  }
-%}
+
+\author{Nehan Munir,  Momina Hassan, Yara Alammouri \\
+  \texttt{\{munirn3, hassm4, alammouy\}@mcmaster.ca} }
 
 \begin{document}
 \maketitle
-% \begin{abstract}
-% \end{abstract}
 
+%------------------------------------------------------------------
 \section{Introduction}
 
-Our project investigates the following question: 
+Parkinson's disease (PD) is a progressive neurodegenerative disorder that affects motor
+function and speech. Clinical assessment involves identifying bradykinesia, or slowed
+movement, alongside rest tremor or rigidity \citep{Postuma:15}. One manifestation of this
+is hypokinetic dysarthria (HD), which involves reduced loudness, limited pitch variation,
+breathy or hoarse voice quality, and imprecise consonant production. These difficulties
+affect several aspects of speech production, including phonation, articulation,
+respiration, resonance, and prosody, providing a basis for investigating acoustic
+indicators of PD \citep{atalar-oguz-genc-2023}. HD is reported to affect about 89\% of
+people with PD \citep{Byatt2025}.
 
-\textit{Which acoustic characteristics are most useful for distinguishing Parkinson's disease from healthy controls, and which machine learning approach best captures these differences?}
+Our project investigates the following question:
+\textit{Which acoustic characteristics are most useful for distinguishing Parkinson's
+disease from healthy controls, and which machine learning approach best captures these
+differences?} We aim to examine whether measurable properties of voice contain useful
+PD-associated patterns and to identify which characteristics contribute most to
+classification.
 
-Parkinson’s disease (PD) is a progressive neurodegenerative disorder that damages dopamine producing neurons in the brain and affects motor functions as well as speech production.
+This work is motivated by the potential for low-cost, accessible assessment using voice
+recordings that require minimal equipment. PD is difficult to diagnose without a
+specialist or expensive tests, and it is reported to be misdiagnosed about 30\% of the
+time \citep{PRO2020}. Local healthcare access challenges reinforce this motivation:
+reported MRI wait times in Hamilton average about 170 days, and more remote places face
+longer waits alongside travel costs \citep{OntarioHealth2026}. Although acoustic analysis
+cannot replace diagnostic imaging, it may offer a complementary approach to screening and
+monitoring. Our project explores this potential through the analysis of PD-associated
+voice characteristics.
 
-
-Parkinson’s is a hard disease to diagnose without either a specialized neurologist or expensive tests, and this results in it being misdiagnosed 30\% of the time (\citealp{PRO2020}). The main symptom that the team is looking for is Hypokinetic Dysarthria, which affects 89\% of all people with PD (\citealp{Byatt2025}). Hypokinetic Dysarthria (HD) is described as “monotonous speech pattern, reduced and monotonous loudness, decreased stress, a breathy or hoarse voice quality, an increase in speech rate, rapid repetition of phonemes, and impreciseness in consonant production”, which can be tested using the dataset that we have procured by testing for the following variables: “phonation, articulation, respiration, resonance, and prosody” (\citealp{atalar-oguz-genc-2023}).
-
-
-In order for a doctor to diagnose someone as having PD or to ask for further testing, they have to prove that the patient has Bradykinesia alongside tremors/rigidity (\citealp{Postuma:15}). Bradykinesia is “slowed movement” and it is extremely difficult to diagnose because it is hard to differentiate it from the side effects of aging (\citealp{CC2023}). However, Bradykinesia causes HD, so having a reliable and accurate method to diagnose it will firstly help caretakers/suspect cases realize that they might have PD without paying for a doctor’s visit, and secondly help doctors in asking for a referral for a neurologist/tests. 
-
+%------------------------------------------------------------------
 \section{Related Work}
 
-Here, talk about the related work you encountered for your approach. Cite at least 5 references. Refer to item 2. No one has done exactly your task? Write about the most similar thing you can find. This should be around 0.25-0.5 pages.
+Previous research has investigated both engineered acoustic features and learned
+representations. \citet{Little2009} classified PD using dysphonia measurements from
+sustained phonations and used an SVM to distinguish participants with PD from healthy
+controls. \citet{Costantini2023} found comparable performance between feature-based
+classifiers and a convolutional neural network, whereas \citet{Iyer2023} achieved better
+performance with spectrogram-based Inception~V3 transfer learning than with random forest
+and logistic regression models. \citet{Idrisoglu2023} identified SVMs as the most
+frequently used method across reviewed studies of voice-affecting disorders.
+\citet{Malekroodi2025} highlighted limitations involving small datasets and insufficient
+external or subject-independent validation in voice-based PD research. These findings
+motivate our focus on a compact acoustic feature set, a comparison between conventional
+classifiers, and participant-separated evaluation.
 
+%------------------------------------------------------------------
 \section{Dataset}
 
-The dataset the team decided to select is Mobile Device Voice Recordings (\citealp{Trivedi2020}). These are audio recordings of
-37 participants collected by Dhaval Trivedi, Hagen Jaeger and Michael Stadtschnitzer at the King's College Hospital in 
-London, UK. The dataset is going to be referred as KCL going forward. Each participant was taken to a 10 m² room where
-they were recorded on a Motorola Moto G4 using a self-developed app similar to i-PROGNOSIS. In between May 17, 2019 and January 24, 2020,
-the KCL team recorded the participants reading “The North Wind and the Sun” and “Tech. Engin. Computer applications in geography snippet”
-and adding them to a "Read Text" folder. They also recorded a simple phone conversation with each participant (except for participant 18),
-which were then added to a "Spontaneous Dialogue". They further seperated each folder by their Parkinson's Disease
-diagnosis, labelling the sub-folders "PD" (Parkinson's Disease) or "HC" (Human Control). They labelled all .wav files 
-with the participant ID, Hoehn and Yahr Scale score, UPDRS II-5 and UPDRS III-18 score, resulting in the following for 
-patient 32 (with Parkinson's): ID32\_pd\_3\_1\_1. 
+We use the Mobile Device Voice Recordings dataset from King's College London
+\citep{Trivedi2020}, referred to as KCL from here on. It contains audio recordings of 37
+participants (21 healthy controls, HC, and 16 people with PD) collected by Dhaval Trivedi,
+Hagen Jaeger and Michael Stadtschnitzer at King's College Hospital in London, UK. Each
+participant was recorded in a 10\,m$^2$ room on a Motorola Moto G4 using a self-developed
+app similar to i-PROGNOSIS, between May 17, 2019 and January 24, 2020. Participants read
+two texts (``The North Wind and the Sun'' and a technical snippet about computer
+applications in geography), which form the \emph{Read Text} (RT) recordings. They also had
+a simple phone conversation, which forms the \emph{Spontaneous Dialogue} (SD) recordings;
+participant 18 has no SD recording. Recordings are separated into PD and HC folders, and
+each \texttt{.wav} file name encodes the participant ID, diagnosis, Hoehn and Yahr stage,
+and UPDRS II-5 and III-18 scores (for example, \texttt{ID32\_pd\_3\_1\_1}).
 
-Before trying to find acoustic features, the team looked into seeing whether the numerical features in the labelled .wav files
-contain any information. Unfortunately, they are usually used to categorize the progression of PD, which means any number
-outside of 0 means that the user already has the disease. 
+We did not use the numerical scores in the file names as features. They describe the
+progression of PD, so any non-zero value already implies that the participant has the
+disease, which would leak the label into the model inputs.
 
-As stated previously, there are only 37 patients, meaning that there will be a maximum of 74 recordings if every participant
-did both aspects of the data gathering. This falls below the recommended dataset size of 1000 data points, which resulted
-in the team devising a plan to seperate the approximately 2 minute recordings into 10 seconds segments. This will give 
-the team closer to 900 data points. There might be problems with overfitting as the final machine learning model will see
-the same voice multiple times, but this can be discouraged based on how the team splits the training data. In order to
-preprocess the data, the team creates a better folder directory structure splitted firstly by their diagnosis, and then 
-each participant folder (labelled by participant ID) will have subfolders for their Spontaneous Dialogue (SD) and 
-Read Text (RT) sections (as they contain the .wav splits). 
+There are 73 recordings (37 RT and 36 SD) of roughly two minutes each, which is well
+below the 1,000 data points we considered a reasonable size for a classifier. We therefore
+split every recording into 10-second segments. Because a model will see the same voice in
+many segments, there is a risk of overfitting to individual speakers; we address this by
+keeping all segments of a participant together when splitting the data
+(Section~\ref{sec:eval}).
 
-The wav files are then created into AudioSegment objects using Pydub, which allows splitting based on milliseconds. Each
-wav file has been splitted into a list of increments of 10 seconds, with the last element of the list being the remaining
-segment. The last element is discarded if it isn't bigger than 8 seconds (an arbitary number brainstormed as the minimum
-time needed to distill information). Each participant has been assigned a dictionary, with the numerical features from the 
-labelled wav files (Hoehn and Yahr Scale score, UPDRS II-5 and UPDRS III-18 score) alongside a boolean describing their
-PD diagnosis. The splitted wav files are then added to the correspondent folder, following HC/PD -> ID -> RT/SD folder. The
-new wav files are labelled starting from 0 (as num.wav). The links to the folders for the RT and SD splits are then
-added to the correct participant dictionary. 
+\paragraph{Preprocessing.}
+We first created a directory structure split by diagnosis, then by participant ID, with
+subfolders for the SD and RT segments. Each \texttt{.wav} file was loaded as a Pydub
+\texttt{AudioSegment}, which allows splitting by milliseconds, and cut into consecutive
+10-second increments. The last piece of each recording is discarded if it is not longer
+than 8 seconds (an arbitrary threshold chosen as the minimum duration likely to contain
+enough information). Each participant is stored as a dictionary holding the diagnosis, the
+scores from the file name, and the paths to the RT and SD segment folders. Segments are
+numbered from 0 (\texttt{0.wav}, \texttt{1.wav}, \dots). The result is 1,013 segments
+(Table~\ref{tab:data}), of which 595 are HC and 418 are PD, with 507 RT and 506 SD segments.
 
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{lrrr}
+    \hline
+    & \textbf{HC} & \textbf{PD} & \textbf{Total} \\
+    \hline
+    Participants & 21 & 16 & 37 \\
+    Recordings (RT + SD) & & & 73 \\
+    Segments & 595 & 418 & 1,013 \\
+    Segments (\% of total) & 58.7 & 41.3 & 100 \\
+    \hline
+  \end{tabular}
+  \caption{Dataset after splitting into 10-second segments.}
+  \label{tab:data}
+\end{table}
 
-
+%------------------------------------------------------------------
 \section{Features}
 
-After the data has been splitted into 10 seconds segments, the team has to convert the segments into numerical features.
-In order to do so, the team will use PRAAT, an open-source software tool used to analyse speech and get sound wave 
-properties (\citealp{Boersma2026}). The PRAAT application can be run from the command line, which allows the Python
-code to automate adding PRAAT output to the participant dictionaries. Since it takes approximately an hour to 
-extract features for the entire dataset using PRAAT, the team decided to use feature selection currently (with 
-the long term goal of being able to feature engineer with a larger pool of features extracted via PRAAT). The Python
-code feeds the wav file as the input, and gets stdout consisting of the numerical features on seperate lines. The
-participant dictionary will include two nested dictionaries for SD or RT, and these will contain numerical keys corresponding
-to the segment wav file (ex. 0 for the first 10 second segment). The stdout is converted into a list and appropiately labelled
-according to its features (which acts as its key), and then added as the value pair to the segment dictionary. In order to input
-it as data into the model, the dictionary was normalized by pandas using json\_normalize, and then converted into both a pickle
-and csv file in order to avoid the hour-long preprocessing. 
+After splitting the recordings, each segment is converted into numerical features using
+Praat, an open-source tool for speech analysis \citep{Boersma2026}. Praat can be run from
+the command line, so our Python code calls it on every segment (\texttt{.wav} file as input)
+and reads the features from its standard output, one per line. Extracting features for the
+whole dataset takes about an hour, so the output is stored in nested dictionaries (RT and
+SD, keyed by segment number), flattened with pandas \texttt{json\_normalize}, and saved as a
+pickle and CSV file to avoid repeating the extraction. Because of this cost we selected a
+small set of features now, with the longer-term goal of engineering features from a larger
+pool of Praat measurements.
 
-The features selected were: Smoothed Cepstral Peak Prominence (CPPS), Harmonics-to-Noise Ratio (HNR), Local shimmer \%, Local shimmer in dB and Long-Term Average Spectrum (LTAS) slope and tilt.
-These were selected as they make up the Acoustic Voice Quality Index (AVQI), which is used by doctors to measure dysphonia (\citealp{Curtis2026}). The current medical understanding is that achieving
-a score of 3.30 or greater from the following formula: avqi = (4.152 - (0.177 * CPPS) - (0.006 * HNR) - (0.037 * Local shimmer \%) + (0.941 * Local shimmer in dB) + (0.01 * slope) + (0.093 * tilt)) * 2.8902 
-likely means the patient has a voice disorder (\citealp{Curtis2026}). The team expects the machine learning model to figure out an equation similar to this.
+We use six engineered acoustic features describing voice periodicity, amplitude variation,
+and spectral characteristics:
+\begin{itemize}
+  \item \textbf{CPPS}: smoothed cepstral peak prominence, the prominence of periodic
+    structure in the voice signal.
+  \item \textbf{HNR}: harmonics-to-noise ratio, harmonic energy relative to noise.
+  \item \textbf{Local shimmer}: cycle-to-cycle variation in vocal amplitude (stored as a
+    fraction).
+  \item \textbf{Local shimmer in dB}: amplitude variation on a logarithmic scale.
+  \item \textbf{LTAS slope and tilt}: long-term average spectrum measures of how acoustic
+    energy is distributed across frequency. The slope compares the 0--1\,kHz and 1--4\,kHz
+    bands; the tilt is the same contrast after fitting a trend line over 600--4,000\,Hz.
+\end{itemize}
 
+These six features were chosen because they make up the Acoustic Voice Quality Index
+(AVQI), which clinicians use to assess dysphonia \citep{Curtis2026}. A score of 3.30 or
+greater from the following formula is generally taken to indicate a likely voice disorder
+\citep{Curtis2026}:
+\begin{equation}
+\begin{split}
+\mathrm{AVQI} = 2.8902\,\big(&4.152 - 0.177\,\mathrm{CPPS}\\
+ &- 0.006\,\mathrm{HNR} - 0.037\,\mathrm{Shim}_{\%}\\
+ &+ 0.941\,\mathrm{Shim}_{dB} + 0.01\,\mathrm{slope}\\
+ &+ 0.093\,\mathrm{tilt}\big)
+\end{split}
+\end{equation}
+We hope the machine learning models can learn a relationship similar to this score.
 
+Each segment is therefore a six-dimensional numerical vector paired with a binary label
+(PD or HC). We keep the participant ID so that segments can be grouped during evaluation.
+Since the representation is already compact, we initially retain all six features, and we
+plan further experiments on whether removing redundant features improves performance.
+
+%------------------------------------------------------------------
 \section{Implementation}
 
-Describe your model and implementation here. Refer to item 4. This may take around a page.
+We implemented the classification pipeline in Python, using pandas and NumPy for data
+preparation, scikit-learn for modelling, and Matplotlib for visualization. For this
+progress report we focused on an initial Support Vector Machine (SVM) and a majority-class
+baseline. Random Forest and $k$-Nearest Neighbours remain planned comparisons. We used a
+fixed random seed of 42 to make the cross-validation splits reproducible.
 
+\paragraph{Data checks.}
+We loaded the extracted measurements from \texttt{segment\_features.csv} and checked that
+the expected feature, label, and metadata columns were present. Our preprocessing function
+checked for invalid identifiers, missing or non-numeric measurements, infinite values,
+duplicate records, and inconsistent diagnoses within participants. These checks identified
+no records requiring removal, so we retained all 1,013 segments from 37 participants. We
+also examined feature distributions and correlations. Although the two shimmer
+measurements are strongly correlated, we retained all six features for this initial
+experiment and did not remove extreme observations.
+
+\paragraph{Inputs and labels.}
+The input matrix contains CPPS, HNR, local shimmer, local shimmer in dB, LTAS slope, and
+LTAS tilt. Each segment has a binary target: 0 for healthy control and 1 for PD.
+Participant identifiers are stored separately for grouping during evaluation, while the
+recording task and segment identifiers are kept as metadata. These identifiers are
+excluded from the model inputs, and we checked that features, labels, and metadata remain
+aligned.
+
+\paragraph{SVM.}
+Our SVM uses a radial basis function (RBF) kernel, which lets it represent nonlinear
+relationships between acoustic measurements and class labels. We combine
+\texttt{StandardScaler} and scikit-learn's \texttt{SVC} in a single pipeline. For each
+fold, the scaler learns feature means and standard deviations only from the training data
+and applies the same transformation to the validation data, so information from the
+validation participants cannot influence standardization. We used fixed settings of
+$C=1.0$, \texttt{gamma="scale"}, and an optimization tolerance of 0.001, with no class
+weighting, feature selection, or hyperparameter tuning. The parameter $C$ controls the
+trade-off between a wide classification margin and penalizing margin violations, while
+gamma controls the influence of each training observation in the RBF kernel. The learning
+objective combines margin regularization with hinge loss, which penalizes incorrect
+predictions and predictions that fall within the margin.
+
+\paragraph{Baseline and training procedure.}
+For comparison we implemented a \texttt{DummyClassifier} that predicts the most frequent
+label in each training fold. Both approaches are evaluated with a shared function that
+creates a fresh estimator for each fold, fits it on the training segments, and records
+predictions for the held-out segments. All five SVM fits converged. We save fold
+assignments, evaluation metrics, predictions, model settings, package versions, and
+confusion matrices to support reproducibility. We have not yet implemented a feature
+importance analysis, which is planned.
+
+%------------------------------------------------------------------
 \section{Results and Evaluation}
 
-How are you evaluating your model? What results do you have so far? What are your baselines? Refer to item 5. This may take around 0.5 pages.
+\subsection{Evaluation strategy}
+\label{sec:eval}
 
+We evaluate both models with five-fold stratified group cross-validation, keeping each
+participant's segments together and approximately preserving class proportions. We
+verified that training and validation participants never overlap, that both classes appear
+in every fold, and that every segment receives exactly one out-of-fold prediction. We do
+not yet have a separate test set, and no hyperparameters were tuned, so the results are
+preliminary. We report accuracy, balanced accuracy, and PD precision, recall and F1-score
+(PD is the positive class), as means and standard deviations across the five folds.
+
+\subsection{Cross-validation results}
+
+\begin{table*}[t]
+  \centering
+  \small
+  \begin{tabular}{lccccc}
+    \hline
+    \textbf{Model} & \textbf{Accuracy} & \textbf{Bal.\ accuracy} & \textbf{PD precision}
+      & \textbf{PD recall} & \textbf{PD F1} \\
+    \hline
+    Majority baseline & 0.587 $\pm$ 0.014 & 0.500 $\pm$ 0.000 & 0.000 $\pm$ 0.000 &
+      0.000 $\pm$ 0.000 & 0.000 $\pm$ 0.000 \\
+    SVM (RBF) & 0.642 $\pm$ 0.111 & 0.617 $\pm$ 0.088 & 0.644 $\pm$ 0.187 &
+      0.474 $\pm$ 0.046 & 0.530 $\pm$ 0.056 \\
+    \hline
+  \end{tabular}
+  \caption{Segment-level five-fold grouped cross-validation results (mean $\pm$ standard
+    deviation across folds).}
+  \label{tab:cv}
+\end{table*}
+
+The majority-class baseline always predicts healthy control, achieving 58.7\%
+$\pm$ 1.4\% accuracy, 50.0\% balanced accuracy, and zero PD recall (Table~\ref{tab:cv}).
+The SVM achieves 64.2\% $\pm$ 11.1\% accuracy, 61.7\% $\pm$ 8.8\% balanced accuracy, 64.4\%
+PD precision, 47.4\% PD recall, and an F1-score of 0.530. This is a modest average
+improvement, with considerable variation across folds: fold accuracy ranges from 0.49 to
+0.76.
+
+The pooled confusion matrix shows 455 correctly classified healthy-control segments and
+198 correctly classified PD segments, alongside 140 false positives and 220 false
+negatives. The missed PD segments highlight the need to improve sensitivity. These are
+segment-level results for unseen participants, with longer recordings contributing more to
+the pooled metrics. Given the 37 participants and the absence of independent or external
+testing, we consider the findings preliminary.
+
+\subsection{Exploratory and error analysis}
+
+We also analysed the extracted features and the SVM's out-of-fold predictions in a
+separate notebook, without changing the models. We first compared the six features between
+groups using participant-level means (Figure~\ref{fig:boxplots}). CPPS was lower in PD
+(7.67\,dB vs.\ 8.48\,dB in HC) and the LTAS slope was steeper ($-19.96$\,dB vs.\
+$-16.73$\,dB), the largest group difference among the features (about 0.7 standard
+deviations). Shimmer was slightly higher in PD, while HNR showed almost no difference. All
+distributions overlapped substantially, and we did not run significance tests, so these
+differences are suggestive only. The two shimmer features were nearly identical
+($r=0.96$) and both correlated strongly with HNR ($|r|\approx 0.9$), so the six features
+contain less independent information than their number suggests.
+
+We then aggregated the SVM's segment predictions to the participant level by majority
+vote. Participant-level accuracy was 62.2\% (23/37), with 7 of 16 PD and 16 of 21 HC
+participants classified correctly. This is only modestly above the 56.8\% obtained by
+always predicting HC, so voting across segments did not improve on segment-level accuracy.
+Finally, we split the out-of-fold predictions by recording task (Table~\ref{tab:task}).
+Accuracy was similar across tasks, but PD recall was lower for spontaneous dialogue than
+for read text.
+
+\begin{table}[t]
+  \centering
+  \small
+  \begin{tabular}{lrrr}
+    \hline
+    \textbf{Task} & \textbf{Acc.} & \textbf{PD recall} & \textbf{HC spec.} \\
+    \hline
+    Read text (RT) & 0.655 & 0.556 & 0.718 \\
+    Spontaneous (SD) & 0.634 & 0.400 & 0.815 \\
+    \hline
+  \end{tabular}
+  \caption{SVM out-of-fold performance by recording task (segment level).}
+  \label{tab:task}
+\end{table}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.8\textwidth]{feature_boxplots_by_group.png}
+  \caption{Distribution of each acoustic feature by group, with one point per participant
+    (participant-level means).}
+  \label{fig:boxplots}
+\end{figure*}
+
+%------------------------------------------------------------------
 \section{Feedback and Plans}
 
-Write about your plans for the remainder of the project. This should include a discussion of the feedback you received from your TA, and how you plan to improve your approach. Reflect on your implementation and areas for improvement. Refer to item 6. This may be around 0.5 pages.
+\paragraph{Feedback received.}
+At the proposal stage, the TAs we consulted (Yasmin and Zizo) told us that speech data is
+acceptable as long as we clearly define which aspect of speech we analyse, that there is no
+required number of data points as long as we explain what the data represents, and that
+combining several data sources is allowed. We therefore focus on voice-quality measures
+(CPPS, HNR, shimmer, and LTAS) from 10-second segments.
+% TODO: add the feedback from the progress-report TA meeting here (what the TA said and how
+% it changes the plan). The assignment asks for feedback received "at any point before the due date".
 
+\paragraph{Plans.}
+Our initial results show that the SVM beats the majority baseline only modestly and misses
+more than half of the PD segments. We plan to:
+\begin{itemize}
+  \item implement Random Forest and $k$-Nearest Neighbours on the same participant-grouped
+    folds, so that all models are compared under identical conditions;
+  \item run a held-out permutation-importance analysis to answer which acoustic
+    characteristics matter most, accounting for correlated features such as the two
+    shimmer measures;
+  \item test whether removing redundant features (for example, one of the shimmer
+    features) helps;
+  \item try limited hyperparameter tuning and class weighting to improve PD recall, using
+    nested participant-grouped validation so that the outer folds stay untouched;
+  \item report participant-level results alongside segment-level results, since the
+    clinical question concerns a person rather than a 10-second clip, and compare models
+    trained separately on read text and spontaneous dialogue;
+  \item consider additional Praat features, and external data if access is granted, to
+    study generalization beyond this single dataset.
+\end{itemize}
 
+\paragraph{Reflection.}
+The large fold-to-fold variation (fold accuracy from 0.49 to 0.76) shows how strongly the
+results depend on which few participants are in the validation set, so we will report
+variability for every model and avoid over-interpreting small differences. Keeping each
+participant within one fold was essential, since random segment-level splits would let a
+model recognise voices instead of PD. The weak participant-level result suggests that the
+current six features carry limited PD signal on their own, which motivates the feature
+analysis and the larger feature pool.
+
+%------------------------------------------------------------------
 \section*{Team Contributions}
 
-Write in this section a few sentences describing the contributions of each team member. What did each member work on? Refer to item 7.
+\textbf{Nehan} worked on the preprocessing and feature extraction for this project,
+including splitting the recordings and running Praat on the segments. He also wrote the
+introduction and the dataset and feature-extraction sections of this report.
 
-Nehan worked on the preprocessing and feature extraction for this project. He also worked on the introduction and corresponding sections in this report.
+\textbf{Momina} helped develop and implement the SVM classification pipeline, including
+data cleaning, participant-separated cross-validation, and the majority-class baseline. She
+also helped write and refine the progress report.
 
-% Bibliography entries for the entire Anthology, followed by custom entries
-%\bibliography{custom,anthology-overleaf-1,anthology-overleaf-2}
+\textbf{Yara} carried out the exploratory analysis of the features and of the SVM
+predictions (PD versus HC feature comparison, participant-level and task-level results),
+wrote the corresponding results subsection, and merged the report sections in \LaTeX.
 
-% Custom bibliography entries only
 \bibliography{custom}
-
-% \appendix
-
-% \section{Example Appendix}
-% \label{sec:appendix}
-
-% This is an appendix.
 
 \end{document}

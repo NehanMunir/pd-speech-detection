@@ -13,3 +13,4 @@ docs/progress_report/*
 !docs/progress_report/custom.bib
 !docs/progress_report/acl_natbib.bst
 !docs/progress_report/main.pdf
+!docs/progress_report/feature_boxplots_by_group.png
