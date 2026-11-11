@@ -75,7 +75,17 @@
 
 \section{Introduction}
 
-Here, write a brief introduction to the problem you are solving. This can be adapted from your problem description and motivation from the original proposal. This should be around 0.25-0.5 pages.
+Our project investigates the following question: 
+
+\textit{Which acoustic characteristics are most useful for distinguishing Parkinson's disease from healthy controls, and which machine learning approach best captures these differences?}
+
+Parkinson’s disease (PD) is a progressive neurodegenerative disorder that damages dopamine producing neurons in the brain and affects motor functions as well as speech production.
+
+
+Parkinson’s is a hard disease to diagnose without either a specialized neurologist or expensive tests, and this results in it being misdiagnosed 30\% of the time (NCBI/NIH, 2020). The main symptom that the team is looking for is Hypokinetic Dysarthria, which affects 89\% of all people with PD (Byatt, 2025). Hypokinetic Dysarthria (HD) is described as “monotonous speech pattern, reduced and monotonous loudness, decreased stress, a breathy or hoarse voice quality, an increase in speech rate, rapid repetition of phonemes, and impreciseness in consonant production”, which can be tested using the dataset that we have procured by testing for the following variables: “phonation, articulation, respiration, resonance, and prosody” (Atalar et al., 2023).
+
+
+In order for a doctor to diagnose someone as having PD or to ask for further testing, they have to prove that the patient has Bradykinesia alongside tremors/rigidity (Postuma et al., 2015). Bradykinesia is “slowed movement” and it is extremely difficult to diagnose because it is hard to differentiate it from the side effects of aging (Cleveland Clinic, 2023). However, Bradykinesia causes HD, so having a reliable and accurate method to diagnose it will firstly help caretakers/suspect cases realize that they might have PD without paying for a doctor’s visit, and secondly help doctors in asking for a referral for a neurologist/tests. 
 
 \section{Related Work}
 
@@ -84,6 +94,41 @@ Here, talk about the related work you encountered for your approach. Cite at lea
 \section{Dataset}
 
 You should write about your dataset here, following the guidelines regarding item 1. This section may be 0.5-1 pages. Depending on your specific dataset, you may want to include subsections for the preprocessing, annotation, etc.
+
+The dataset the team decided to select is Mobile Device Voice Recordings (Trivedi, 2020). These are audio recordings of
+37 participants collected by Dhaval Trivedi, Hagen Jaeger and Michael Stadtschnitzer at the King's College Hospital in 
+London, UK. The dataset is going to be referred as KCL going forward. Each participant was taken to a 10 m² room where
+they were recorded on a Motorola Moto G4 using a self-developed app similar to i-PROGNOSIS. In between May 17, 2019 and January 24, 2020,
+the KCL team recorded the participants reading “The North Wind and the Sun” and “Tech. Engin. Computer applications in geography snippet”
+and adding them to a "Read Text" folder. They also recorded a simple phone conversation with each participant (except for participant 18),
+which were then added to a "Spontaneous Dialogue". They further seperated each folder by their Parkinson's Disease
+diagnosis, labelling the sub-folders "PD" (Parkinson's Disease) or "HC" (Human Control). They labelled all .wav files 
+with the participant ID, Hoehn and Yahr Scale score, UPDRS II-5 and UPDRS III-18 score, resulting in the following for 
+patient 32 (with Parkinson's): ID32\_pd\_3\_1\_1. 
+
+Before trying to find acoustic features, the team looked into seeing whether the numerical features in the labelled .wav files
+contain any information. Unfortunately, they are usually used to categorize the progression of PD, which means any number
+outside of 0 means that the user already has the disease. 
+
+As stated previously, there are only 37 patients, meaning that there will be a maximum of 74 recordings if every participant
+did both aspects of the data gathering. This falls below the recommended dataset size of 1000 data points, which resulted
+in the team devising a plan to seperate the approximately 2 minute recordings into 10 seconds segments. This will give 
+the team closer to 900 data points. There might be problems with overfitting as the final machine learning model will see
+the same voice multiple times, but this can be discouraged based on how the team splits the training data. In order to
+preprocess the data, the team creates a better folder directory structure splitted firstly by their diagnosis, and then 
+each participant folder (labelled by participant ID) will have subfolders for their Spontaneous Dialogue (SD) and 
+Read Text (RT) sections (as they contain the .wav splits). 
+
+The wav files are then created into AudioSegment objects using Pydub, which allows splitting based on milliseconds. Each
+wav file has been splitted into a list of increments of 10 seconds, with the last element of the list being the remaining
+segment. The last element is discarded if it isn't bigger than 8 seconds (an arbitary number brainstormed as the minimum
+time needed to distill information). Each participant has been assigned a dictionary, with the numerical features from the 
+labelled wav files (Hoehn and Yahr Scale score, UPDRS II-5 and UPDRS III-18 score) alongside a boolean describing their
+PD diagnosis. The splitted wav files are then added to the correspondent folder, following HC/PD -> ID -> RT/SD folder. The
+new wav files are labelled starting from 0 (as num.wav). The links to the folders for the RT and SD splits are then
+added to the correct participant dictionary. 
+
+
 
 \section{Features}
 
